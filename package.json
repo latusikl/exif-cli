@@ -1,0 +1,12 @@
+{
+  "name": "exif-cli",
+  "version": "1.0.0",
+  "description": "Command Line Interface tool for cleaning and viewing EXIF data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["exif","jpg","clean","view"],
+  "author": "Łukasz Latusik <latusikl@gmail.com",
+  "license": "MIT"
+}

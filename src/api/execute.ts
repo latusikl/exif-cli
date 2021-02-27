@@ -1,5 +1,3 @@
-import { CommandArg } from "./command-arg";
-
 export interface Execute {
-  execute(commandArgs: CommandArg[]): void;
+  execute(commandArgs: Map<string, string | undefined>): void;
 }

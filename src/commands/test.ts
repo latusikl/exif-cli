@@ -1,8 +1,7 @@
-import {CommandArg} from "../api/command-arg";
 import Command from "../api/command";
 
 class Test extends Command {
-    execute(commandArgs: CommandArg[]): void {
+    execute(commandArgs: Map<string, string | undefined>): void {
         console.log(commandArgs);
     }
 }

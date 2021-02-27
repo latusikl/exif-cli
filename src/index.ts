@@ -13,11 +13,11 @@ async function runCommand(processArgv: string[]) {
       if (command instanceof Command) {
         command.execute(argParser.parseCommandParameters(processArgv.slice(3)));
       } else {
-        console.error("Command does not fulfill contract.");
+        console.error("Command does not fulfill contract or does not exist.");
         process.exit(-1);
       }
     } catch (e) {
-      console.error("Command does not exist.");
+      console.log(`Possible cause: ${e.message}`);
       console.debug(e);
     }
   } else {

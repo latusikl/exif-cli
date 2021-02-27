@@ -1,3 +1,4 @@
+//TODO Resolve situation when both long and short form of the same parameter passed
 class ArgsParser {
   private LONG_PREFIX = "--";
   private SHORT_PREFIX = "-";

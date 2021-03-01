@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { it } from "mocha";
-import argsParser from "../src/util/args/args-parser";
+import argsParser from "../src/util/args-parser";
 
 describe("Argument parser tests", () => {
   it("Should throw error when params not start with name parameter", () => {

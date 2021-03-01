@@ -1,9 +1,11 @@
 import Command from "./api/command";
-import argParser from "./util/args/args-parser";
+import argParser from "./util/args-parser";
+import display from "./util/print";
 
 runCommand(process.argv);
 
 async function runCommand(processArgv: string[]) {
+  display.appLogo();
   if (processArgv.length >= 3) {
     const commandName = processArgv[2];
     try {
@@ -11,17 +13,18 @@ async function runCommand(processArgv: string[]) {
         (obj) => obj.default
       );
       if (command instanceof Command) {
+        display.info(`Executing ${commandName} command.`);
         command.execute(argParser.parseCommandParameters(processArgv.slice(3)));
       } else {
-        console.error("Command does not fulfill contract or does not exist.");
+        display.error("Command does not fulfill contract or does not exist.");
         process.exit(-1);
       }
     } catch (e) {
-      console.log(`Possible cause: ${e.message}`);
-      console.debug(e);
+      display.error(`Unable to load command "${commandName}"`);
+      // console.debug(e);
     }
   } else {
-    console.error("No command specified.");
+    display.error("No command specified.");
   }
 }
 

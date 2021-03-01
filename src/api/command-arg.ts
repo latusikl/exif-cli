@@ -1,4 +1,8 @@
 export interface CommandArg {
-  name: string;
+  shortName: string;
+  longName: string;
+  description: string;
   value?: string;
+  required: boolean;
+  validator : (value : string) => boolean;
 }

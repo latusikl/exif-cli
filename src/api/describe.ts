@@ -1,3 +1,3 @@
 export interface Describe {
-    describe() : string
+    describeCommand() : void
 }

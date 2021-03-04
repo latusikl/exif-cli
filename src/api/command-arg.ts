@@ -4,5 +4,5 @@ export interface CommandArg {
   description: string;
   value?: string;
   required: boolean;
-  validator : (value : string) => boolean;
+  validator : (value : string) => [boolean,string | undefined];
 }

@@ -6,19 +6,42 @@ import print from "../util/print";
 
 export default abstract class Command
   implements Execute, Describe, Parametrize {
+  private readonly helpParamShort = "-h";
+  private readonly helpParamLong = "--help";
+  protected readonly commandName: string;
+  protected readonly commandDescription: string;
+  protected readonly commandArgs: CommandArg[];
 
-  protected readonly commandName : string;
-  protected readonly commandDescription : string;
-  protected readonly commandArgs : CommandArg[];
-
-
-  constructor(commandName: string, commandDescription: string, commandArgs: CommandArg[]) {
+  protected constructor(
+    commandName: string,
+    commandDescription: string,
+    definedCommandArgs: CommandArg[]
+  ) {
     this.commandName = commandName;
     this.commandDescription = commandDescription;
-    this.commandArgs = commandArgs;
+    this.commandArgs = definedCommandArgs;
   }
 
-  abstract execute(commandArgs: Map<string, string | undefined>): void;
+  execute(inputCommandArgs: Map<string, string | undefined>): void {
+    console.log("Common execution part");
+    this.executeInternal(inputCommandArgs);
+  }
+
+  protected abstract executeInternal(
+    commandArgs: Map<string, string | undefined>
+  ): void;
+
+  private isParamWithRestrictedNameExplicitlyDefined(
+    commandArgs: CommandArg[]
+  ): boolean {
+    return (
+      commandArgs.filter(
+        (arg) =>
+          arg.shortName === this.helpParamShort ||
+          arg.longName === this.helpParamLong
+      ).length === 0
+    );
+  }
 
   describeCommand(): void {
     print.commandUsage(this.commandName);
@@ -31,18 +54,14 @@ export default abstract class Command
   }
 
   getParameterByLongName(longName: string): CommandArg | undefined {
-    return this.commandArgs
-      .filter((arg) => arg.longName === longName)
-      .pop();
+    return this.commandArgs.filter((arg) => arg.longName === longName).pop();
   }
 
   getParameterByShortName(shortName: string): CommandArg | undefined {
-    return this.commandArgs
-      .filter((arg) => arg.shortName === shortName)
-      .pop();
+    return this.commandArgs.filter((arg) => arg.shortName === shortName).pop();
   }
 
   isHelpRequest(): boolean {
-    return false;
+    return this.isParamWithRestrictedNameExplicitlyDefined(this.commandArgs);
   }
 }

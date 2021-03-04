@@ -22,9 +22,9 @@ class Show extends Command {
     );
   }
 
-  execute(commandArgs: Map<string, string | undefined>): void {
+  executeInternal(inputCommandArgs: Map<string, string | undefined>): void {
     //TODO implement
-    console.log("Command executed");
+    console.log("Command specific part executed");
   }
 }
 

@@ -1,3 +1,3 @@
 export interface Execute {
-  execute(commandArgs: Map<string, string | undefined>): void;
+  execute(inputCommandArgs: Map<string, string | undefined>): void;
 }
